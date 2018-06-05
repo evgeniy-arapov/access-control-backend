@@ -1,0 +1,33 @@
+{
+  "name": "node-rbac",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_PATH=. mocha",
+    "start": "NODE_PATH=. nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "config": "^1.29.4",
+    "jsonwebtoken": "^8.1.1",
+    "koa": "^2.4.1",
+    "koa-bodyparser": "^4.2.0",
+    "koa-passport": "^4.0.1",
+    "koa-router": "^7.4.0",
+    "lodash": "^4.17.5",
+    "mongoose": "^5.0.3",
+    "passport-jwt": "^3.0.1",
+    "passport-local": "^1.0.0",
+    "role-acl": "^3.0.6"
+  },
+  "devDependencies": {
+    "clarify": "^2.1.0",
+    "request": "^2.87.0",
+    "request-promise": "^4.2.2",
+    "should": "^13.2.1",
+    "trace": "^3.1.0"
+  }
+}
