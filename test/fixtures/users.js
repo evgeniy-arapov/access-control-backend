@@ -17,6 +17,7 @@ module.exports = {
     email: "newuser@mail.com",
     displayName: "New User",
     password: "123456",
+    role: "user",
     _id: "123456789012345678901235"
-  },
+  }
 };

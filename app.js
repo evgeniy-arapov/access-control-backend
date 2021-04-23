@@ -1,9 +1,10 @@
 const Koa = require("koa");
 const app = module.exports = new Koa();
 
-const mongoose = require("lib/initializers/mongoose");
-const passport = require("lib/initializers/passport");
-const accessControl = require("lib/initializers/accessControl");
+require("lib/initializers/mongoose");
+require("lib/initializers/passport");
+require("lib/initializers/accessControl");
+
 //const grantList = require("test/fixtures/grantList");
 //const Grant = require("models/grant");
 //Grant.create(grantList)

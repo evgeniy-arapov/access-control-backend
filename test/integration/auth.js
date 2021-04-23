@@ -1,6 +1,6 @@
+require("should");
 const mongoose = require("mongoose");
 const app = require("../../app");
-const should = require("should");
 const config = require("config");
 const User = require("models/user");
 const request = require("request-promise").defaults({

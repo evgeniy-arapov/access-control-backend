@@ -1,5 +1,5 @@
 module.exports = {
-  port: 3000,
+  port: 3002,
   dbUri: "mongodb://localhost/nodeRbac",
   crypto: {
     hash: {

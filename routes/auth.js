@@ -8,21 +8,31 @@ const config = require("config");
 const User = require("models/user");
 const pick = require("lodash/pick");
 
-router.post("/login", passport.authenticate("local"), async ctx => {
-  const user = ctx.state.user;
-  if (!user) return ctx.throw(401);
-  const jwt = getJWT(user);
-  await user.update({jwt});
+router.post(
+  "/login",
 
-  ctx.body = {jwt, user};
-});
+  async (ctx, next) => {
+    console.log("before passport auth");
+    await next();
+  },
+
+  passport.authenticate("local"),
+
+  async ctx => {
+    const user = ctx.state.user;
+    if (!user) return ctx.throw(401);
+    const jwt = getJWT(user);
+    await user.update({jwt});
+
+    ctx.body = {jwt, user};
+  });
 
 router.post("/register",
   async (ctx, next) => {
-    await passport.authenticate("jwt", (err, user, info) => {
-      if(err) throw err;
-      if (user) ctx.throw(403);  
-    })(ctx,next);
+    await passport.authenticate("jwt", (err, user, /*info*/) => {
+      if (err) throw err;
+      if (user) ctx.throw(403);
+    })(ctx, next);
     await next();
   },
   async ctx => {
@@ -47,6 +57,7 @@ router.get("/logout", passport.authenticate("jwt"), async ctx => {
 module.exports = router;
 
 function getJWT (user) {
+  console.log(user);
   return jsonWebToken.sign({
     sub: user._id,
     displayName: user.displayName || user.email

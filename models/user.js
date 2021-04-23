@@ -18,9 +18,14 @@ const userSchema = new mongoose.Schema({
     required: true
   },
   jwt: String,
-  role: String
+  role: {
+    type: String,
+    required: true,
+    default: "user"
+  }
 }, {
-  timestamps: true
+  timestamps: true,
+  collection: "users"
 });
 
 userSchema.virtual("password")
@@ -30,7 +35,7 @@ userSchema.virtual("password")
         this.invalidate("password", "Пароль должен быть минимум 4 символа.");
       }
     }
-    
+
     if(password) {
       this._plainPassword = password;
       this.salt = crypto.randomBytes(config.crypto.hash.length).toString("base64");
@@ -57,7 +62,7 @@ userSchema.virtual("password")
 userSchema.methods.checkPassword = function (password) {
   if(!password) return false;
   if(!this.passwordHash) return false;
-  
+
   return crypto.pbkdf2Sync(
     password,
     this.salt,

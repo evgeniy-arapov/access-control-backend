@@ -1,4 +1,4 @@
-//require("lib/trace");
+require("lib/trace");
 
 const config = require("config");
 
